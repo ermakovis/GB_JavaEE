@@ -18,7 +18,6 @@ public class HeaderServlet extends HttpServlet {
         writer.println("<ul>");
         writer.printf("<li><a href='%s/main'>Главная</a></li>", req.getContextPath());
         writer.printf("<li><a href='%s/catalog'>Каталог</a></li>", req.getContextPath());
-        writer.printf("<li><a href='%s/product'>Продукты</a></li>", req.getContextPath());
         writer.printf("<li><a href='%s/cart'>Корзина</a></li>", req.getContextPath());
         writer.printf("<li><a href='%s/order'>Заказ</a></li>", req.getContextPath());
         writer.println("</ul>");

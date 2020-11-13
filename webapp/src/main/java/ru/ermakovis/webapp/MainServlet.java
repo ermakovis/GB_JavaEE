@@ -17,8 +17,7 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.info("get request");
-        resp.setHeader("PageName", "Главная");
-        getServletContext().getRequestDispatcher("/page_header").include(req, resp);
-        resp.getWriter().println("<p>Main</p>");
+        req.setAttribute("pageName", "Main");
+        getServletContext().getRequestDispatcher("/WEB-INF/views/main.jsp").forward(req, resp);
     }
 }
