@@ -1,6 +1,5 @@
 package ru.ermakovis.persist;
 
-import javax.enterprise.inject.Default;
 import javax.persistence.*;
 
 @Entity
@@ -13,8 +12,9 @@ public class Order {
     @Column(name = "order_id")
     private Integer orderId;
 
-    @Column(name = "product_id")
-    private Integer productId;
+    @OneToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     @Column
     private Integer quantity;
@@ -26,16 +26,16 @@ public class Order {
         return id;
     }
 
-    public int getOrderId() {
+    public Integer getOrderId() {
         return orderId;
     }
 
-    public int getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public int getQuantity() {
