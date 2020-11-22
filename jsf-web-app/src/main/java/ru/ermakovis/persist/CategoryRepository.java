@@ -9,34 +9,34 @@ import java.util.List;
 
 @Named
 @ApplicationScoped
-public class CatalogRepository {
+public class CategoryRepository {
 
     @PersistenceContext(unitName = "ds")
     private EntityManager em;
 
     @Transactional
-    public void insert(Product product) {
-        em.persist(product);
+    public void insert(Category category) {
+        em.persist(category);
     }
 
     @Transactional
-    public void update(Product product) {
-        em.merge(product);
+    public void update(Category category) {
+        em.merge(category);
     }
 
     @Transactional
     public void delete(int id) {
-        Product item = em.find(Product.class, id);
+        Category item = em.find(Category.class, id);
         if (item != null) {
             em.remove(item);
         }
     }
 
-    public Product find(int id) {
-        return em.find(Product.class, id);
+    public Category find(int id) {
+        return em.find(Category.class, id);
     }
 
-    public List<Product> findAll() {
-        return em.createQuery("FROM Product c", Product.class).getResultList();
+    public List<Category> findAll() {
+        return em.createQuery("FROM Category c", Category.class).getResultList();
     }
 }

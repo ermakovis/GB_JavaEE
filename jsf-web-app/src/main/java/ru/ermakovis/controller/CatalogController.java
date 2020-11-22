@@ -1,9 +1,11 @@
 package ru.ermakovis.controller;
 
-import ru.ermakovis.persist.CatalogItem;
+import ru.ermakovis.persist.Product;
 import ru.ermakovis.persist.CatalogRepository;
+import ru.ermakovis.persist.Category;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -16,40 +18,51 @@ public class CatalogController implements Serializable {
 
     @Inject
     private CatalogRepository catalogRepository;
-    private CatalogItem currentItem;
 
-    public List<CatalogItem> getAllItems() throws SQLException {
-        return catalogRepository.findAll();
+
+    private Product currentProduct;
+
+    private List<Product> items;
+    private List<Category> categories;
+
+
+    public void preloadData(ComponentSystemEvent componentSystemEvent) {
+        this.items = catalogRepository.findAll();
     }
 
-    public CatalogItem getCurrentItem() {
-        return currentItem;
+
+    public List<Product> getAllItems() {
+        return items;
     }
 
-    public void setCurrentItem(CatalogItem item) {
-        this.currentItem = item;
+    public Product getCurrentProduct() {
+        return currentProduct;
     }
 
-    public String saveItem() throws SQLException {
-        if (currentItem.getId() == null) {
-            catalogRepository.insert(currentItem);
+    public void setCurrentProduct(Product product) {
+        this.currentProduct = product;
+    }
+
+    public String saveItem() {
+        if (currentProduct.getId() == null) {
+            catalogRepository.insert(currentProduct);
         } else {
-            catalogRepository.update(currentItem);
+            catalogRepository.update(currentProduct);
         }
         return "/catalog.xhtml?faces-redirect=true";
     }
 
-    public String editItem(CatalogItem item) {
-        setCurrentItem(item);
-        return "/item.xhtml?faces-redirect=true";
+    public String editItem(Product product) {
+        setCurrentProduct(product);
+        return "/item.xhtml";
     }
 
-    public void deleteItem(CatalogItem item) throws SQLException {
+    public void deleteItem(Product item) throws SQLException {
         catalogRepository.delete(item.getId());
     }
 
     public String createItem() {
-        currentItem = new CatalogItem();
+        currentProduct = new Product();
         return "/item.xhtml?faces-redirect=true";
     }
 }
