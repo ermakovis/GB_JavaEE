@@ -25,21 +25,6 @@
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>catalog.xhtml</welcome-file>
+        <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
-
-    <context-param>
-        <param-name>jdbcConnectionString</param-name>
-        <param-value>jdbc:mysql://localhost:3306/javaee_store</param-value>
-    </context-param>
-
-    <context-param>
-        <param-name>username</param-name>
-        <param-value>admin</param-value>
-    </context-param>
-
-    <context-param>
-        <param-name>password</param-name>
-        <param-value>gfhjkm123</param-value>
-    </context-param>
 </web-app>

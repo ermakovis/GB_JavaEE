@@ -8,7 +8,11 @@
     <ui:param name="title" value="Catalog"/>
 </ui:include>
 
+
 <h:body>
+    
+    <f:event listener="${catalogController.preloadData}" type="preRenderView"/>
+    
     <div class="container">
         <div class="row py-2">
             <div>
@@ -29,8 +33,12 @@
                         #{item.name}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Amount</f:facet>
-                        #{item.amount}
+                        <f:facet name="header">Description</f:facet>
+                        #{item.description}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Category</f:facet>
+                        #{item.category.name}
                     </h:column>
 
                     <h:column>
