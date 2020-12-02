@@ -1,4 +1,6 @@
-package ru.ermakovis.persist;
+package ru.ermakovis.persist.order;
+
+import ru.ermakovis.persist.product.Product;
 
 import javax.persistence.*;
 
@@ -20,6 +22,12 @@ public class Order {
     private Integer quantity;
 
     public Order() {
+    }
+
+    public Order(Integer id, Product product, Integer quantity) {
+        this.id = id;
+        this.product = product;
+        this.quantity = quantity;
     }
 
     public Integer getId() {

@@ -1,7 +1,7 @@
 package ru.ermakovis.controller;
 
-import ru.ermakovis.persist.Category;
-import ru.ermakovis.persist.CategoryRepository;
+import ru.ermakovis.persist.category.Category;
+import ru.ermakovis.persist.category.CategoryRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.event.ComponentSystemEvent;
