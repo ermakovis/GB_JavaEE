@@ -11,13 +11,17 @@ public interface ProductRepository {
     void update(Product product);
 
     @Transactional
-    void delete(int id);
+    void delete(Integer id);
 
-    Product find(int id);
+    Product find(Integer id);
 
     List<Product> findAll();
 
-    ProductRepr findProductReprById(long id);
+    ProductRepr findProductReprById(Integer id);
+
+    List<ProductRepr> findProductReprByName(String name);
+
+    List<ProductRepr> findProductReprByCategoryName(String name);
 
     List<ProductRepr> findAllProductRepr();
 }

@@ -28,7 +28,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     @Transactional
-    public void delete(int id) {
+    public void delete(Integer id) {
         Product item = em.find(Product.class, id);
         if (item != null) {
             em.remove(item);
@@ -36,7 +36,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public Product find(int id) {
+    public Product find(Integer id) {
         return em.find(Product.class, id);
     }
 
@@ -46,13 +46,33 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public ProductRepr findProductReprById(long id) {
+    public ProductRepr findProductReprById(Integer id) {
         return em.createQuery("select new ru.ermakovis.persist.product.ProductRepr(p.id, p.name, p.description, c) " +
                 "from Product p " +
                 "left join p.category c " +
                 "where p.id = :id", ProductRepr.class)
                 .setParameter("id", id)
                 .getSingleResult();
+    }
+
+    @Override
+    public List<ProductRepr> findProductReprByName(String name) {
+        return em.createQuery("select new ru.ermakovis.persist.product.ProductRepr(p.id, p.name, p.description, c) " +
+                "from Product p " +
+                "left join p.category c " +
+                "where p.name = :name", ProductRepr.class)
+                .setParameter("name", name)
+                .getResultList();
+    }
+
+    @Override
+    public List<ProductRepr> findProductReprByCategoryName(String name) {
+        return em.createQuery("select new ru.ermakovis.persist.product.ProductRepr(p.id, p.name, p.description, c) " +
+                "from Product p " +
+                "left join p.category c " +
+                "where c.name = :name", ProductRepr.class)
+                .setParameter("name", name)
+                .getResultList();
     }
 
     @Override
