@@ -1,8 +1,9 @@
 package ru.ermakovis.controller;
 
-import ru.ermakovis.persist.Product;
-import ru.ermakovis.persist.CatalogRepository;
-import ru.ermakovis.persist.Category;
+import ru.ermakovis.persist.category.CategoryRepository;
+import ru.ermakovis.persist.product.Product;
+import ru.ermakovis.persist.product.ProductRepr;
+import ru.ermakovis.service.ProductService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.event.ComponentSystemEvent;
@@ -17,52 +18,48 @@ import java.util.List;
 public class CatalogController implements Serializable {
 
     @Inject
-    private CatalogRepository catalogRepository;
+    private ProductService productService;
 
-
-    private Product currentProduct;
-
-    private List<Product> items;
-    private List<Category> categories;
-
+    private ProductRepr currentProduct;
+    private List<ProductRepr> items;
 
     public void preloadData(ComponentSystemEvent componentSystemEvent) {
-        this.items = catalogRepository.findAll();
+        this.items = productService.findAllRepr();
     }
 
 
-    public List<Product> getAllItems() {
+    public List<ProductRepr> getAllItems() {
         return items;
     }
 
-    public Product getCurrentProduct() {
+    public ProductRepr getCurrentProduct() {
         return currentProduct;
     }
 
-    public void setCurrentProduct(Product product) {
+    public void setCurrentProduct(ProductRepr product) {
         this.currentProduct = product;
     }
 
     public String saveItem() {
         if (currentProduct.getId() == null) {
-            catalogRepository.insert(currentProduct);
+            productService.insert(currentProduct);
         } else {
-            catalogRepository.update(currentProduct);
+            productService.update(currentProduct);
         }
         return "/catalog.xhtml?faces-redirect=true";
     }
 
-    public String editItem(Product product) {
+    public String editItem(ProductRepr product) {
         setCurrentProduct(product);
         return "/item.xhtml";
     }
 
     public void deleteItem(Product item) throws SQLException {
-        catalogRepository.delete(item.getId());
+        productService.delete(item.getId());
     }
 
     public String createItem() {
-        currentProduct = new Product();
+        currentProduct = new ProductRepr();
         return "/item.xhtml?faces-redirect=true";
     }
 }

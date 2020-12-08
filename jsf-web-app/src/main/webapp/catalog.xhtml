@@ -12,7 +12,7 @@
 <h:body>
     
     <f:event listener="${catalogController.preloadData}" type="preRenderView"/>
-    
+
     <div class="container">
         <div class="row py-2">
             <div>
@@ -38,17 +38,20 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">Category</f:facet>
-                        #{item.category.name}
+                        #{empty item.categoryName ? "No category" : item.categoryName}
                     </h:column>
 
                     <h:column>
                         <h:form>
                             <f:facet name="header">Action</f:facet>
+                            <h:commandButton value="Add" styleClass="btn btn-success"
+                                             action="#{orderController.addItem(item)}"/>
                             <h:commandButton value="Edit" styleClass="btn btn-success"
                                              action="#{catalogController.editItem(item)}"/>
                             <h:commandButton value="Delete" styleClass="btn btn-danger"
-                                             action="#{catalogController.deleteItem(item)}">
-                            </h:commandButton>
+                                             action="#{catalogController.deleteItem(item)}"/>
+
+
                         </h:form>
                     </h:column>
 

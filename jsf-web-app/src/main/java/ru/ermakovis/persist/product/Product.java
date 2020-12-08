@@ -1,5 +1,7 @@
-package ru.ermakovis.persist;
+package ru.ermakovis.persist.product;
 
+
+import ru.ermakovis.persist.category.Category;
 
 import javax.persistence.*;
 
@@ -17,10 +19,16 @@ public class Product {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
     private Category category;
 
     public Product() {
+    }
+
+    public Product(Integer id, String name, String description, Category category) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.category = category;
     }
 
     public Integer getId() {

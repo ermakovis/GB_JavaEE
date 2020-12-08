@@ -1,6 +1,9 @@
-package ru.ermakovis.persist;
+package ru.ermakovis.persist.category;
+
+import ru.ermakovis.persist.product.Product;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -11,6 +14,7 @@ public class Category {
     private Integer id;
 
     @Column
+    @NotNull
     private String name;
 
     @Column
