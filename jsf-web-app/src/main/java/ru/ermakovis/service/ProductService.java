@@ -26,7 +26,7 @@ public class ProductService {
     @TransactionAttribute
     public void insert(ProductRepr productRepr) {
         logger.info("insert call");
-        Category category = categoryRepository.find(productRepr.getId());
+        Category category = categoryRepository.find(productRepr.getCategoryId());
         productRepository.insert(new Product(null, productRepr.getName(),
                 productRepr.getDescription(), category));
     }
@@ -45,8 +45,26 @@ public class ProductService {
         productRepository.delete(id);
     }
 
+    @TransactionAttribute
+    public void setCategory(ProductRepr repr, Integer category_id) {
+        logger.info("Set category");
+        Product product = productRepository.find(repr.getId());
+        Category category = categoryRepository.find(category_id);
+        product.setCategory(category);
+        productRepository.update(product);
+    }
+
     public ProductRepr find(Integer id) {
+        logger.info("find " + id);
         return productRepository.findProductReprById(id);
+    }
+
+    public List<ProductRepr> findByName(String name) {
+        return productRepository.findProductReprByName(name);
+    }
+
+    public List<ProductRepr> findByCategoryName(String name) {
+        return productRepository.findProductReprByCategoryName(name);
     }
 
     public List<ProductRepr> findAllRepr() {

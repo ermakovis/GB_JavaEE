@@ -28,7 +28,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     @Transactional
-    public void delete(int id) {
+    public void delete(Integer id) {
         Category item = em.find(Category.class, id);
         if (item != null) {
             em.remove(item);
@@ -36,7 +36,9 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     @Override
-    public Category find(int id) {
+    public Category find(Integer id) {
+        if (id == null)
+            return null;
         return em.find(Category.class, id);
     }
 

@@ -12,6 +12,8 @@
         <module>webapp</module>
         <module>jsp-web-app</module>
         <module>jsf-web-app</module>
+        <module>soap-client</module>
+        <module>rest-client</module>
     </modules>
 
 </project>

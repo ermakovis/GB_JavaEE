@@ -11,9 +11,9 @@ public interface CategoryRepository {
     void update(Category category);
 
     @Transactional
-    void delete(int id);
+    void delete(Integer id);
 
-    Category find(int id);
+    Category find(Integer id);
 
     List<Category> findAll();
 }
